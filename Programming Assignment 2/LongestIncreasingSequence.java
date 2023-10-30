@@ -25,6 +25,7 @@ public class LongestIncreasingSequence {
 
         int choice = 0;
         int matrixSize = 0;
+        long startTime;
 
         while (true) {
             System.out.print("Please enter (1) for Test File Version or (2) for Random Function Version: ");
@@ -46,19 +47,33 @@ public class LongestIncreasingSequence {
             String filename = sc.nextLine();
 
             int[][] matrix = readMatrixFromFile(filename, matrixSize);
+
+            startTime = System.currentTimeMillis();
+
             List<SequenceData> sequence = findLIS(matrix);
+
+            long endTime = System.currentTimeMillis();
+            long elapsedTime = endTime - startTime;
 
             // Print the sequence
             printSequence(sequence);
+            System.out.println("Runtime: " + elapsedTime + " ms.");
         } else {
             System.out.println("***Randomly Generated Version***");
             System.out.print("Please enter the size of the given matrix: ");
             matrixSize = sc.nextInt();
             int[][] matrix = generateMatrix(matrixSize);
+
+            startTime = System.currentTimeMillis();
+
             List<SequenceData> sequence = findLIS(matrix);
+
+            long endTime = System.currentTimeMillis();
+            long elapsedTime = endTime - startTime;
 
             // Print the sequence
             printSequence(sequence);
+            System.out.println("Runtime: " + elapsedTime + " ms.");
         }
 
         sc.close();
@@ -69,8 +84,9 @@ public class LongestIncreasingSequence {
         int[][] matrix = new int[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
+                // Generate a random integer between 0 and 1000
                 matrix[i][j] = (int) (Math.random() * 1001);
-                System.out.print(matrix[i][j] + "\t");
+                System.out.printf("%4d", matrix[i][j]);
             }
             System.out.println();
         }
@@ -164,9 +180,9 @@ public class LongestIncreasingSequence {
 
     // Print the sequence formatted for readability
     public static void printSequence(List<SequenceData> sequence) {
-        System.out.println("Value:\t X:\t Y:");
+        System.out.println("Value:\t X:   Y:");
         for (SequenceData SequenceData : sequence) {
-            System.out.println(SequenceData.getValue() + "\t(" + SequenceData.getX() + "   ,\t " + SequenceData.getY() + ")");
+            System.out.printf("%4d\t(%2d, %2d)\n", SequenceData.getValue(), SequenceData.getX(), SequenceData.getY());
         }
         System.out.println();
         System.out.println("The length of the sequence is " + sequence.size() + ".");
@@ -191,7 +207,7 @@ public class LongestIncreasingSequence {
     }
 }
 
-// Sequence class to store data about values in the current sequence
+// Sequence class to store data about values in the current sequence, could have also used Hashtable
 class SequenceData {
     private int value;
     private int x;

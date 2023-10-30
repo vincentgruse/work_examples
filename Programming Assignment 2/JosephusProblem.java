@@ -48,7 +48,7 @@ public class JosephusProblem {
 
         // Loop until a valid input for the position is entered
         while (!validInput) {
-            System.out.print("Enter the position: ");
+            System.out.print("\nEnter the position: ");
             if (sc.hasNextInt()) {
                 positionVal = sc.nextInt();
                 validInput = true;
@@ -63,7 +63,8 @@ public class JosephusProblem {
     }
 
     public static void killSoldiers(Queue<String> soldiers, int position) {
-        System.out.println("Eliminating order:");
+        long startTime = System.currentTimeMillis();
+        System.out.println("\nEliminating order:");
         int count = 1;
 
         // Eliminate soldiers until only one is left in the queue
@@ -78,9 +79,11 @@ public class JosephusProblem {
             System.out.println(count + ". " + killed);
             count++;
         }
-
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
         // Print the survivor
         String survivor = soldiers.poll();
-        System.out.println("The survivor is " + survivor + ".");
+        System.out.println("\nThe survivor is " + survivor + ".");
+        System.out.println("Runtime: " + elapsedTime + "ms.");
     }
 }
