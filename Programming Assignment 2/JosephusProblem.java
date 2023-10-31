@@ -12,6 +12,32 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class JosephusProblem {
+
+    public static void killSoldiers(Queue<String> soldiers, int position) {
+        long startTime = System.currentTimeMillis();
+        System.out.println("\nEliminating order:");
+        int count = 1;
+
+        // Eliminate soldiers until only one is left in the queue
+        while (soldiers.size() > 1) {
+            // Iterate through the queue
+            for (int i = 0; i < position - 1; i++) {
+                soldiers.add(soldiers.poll());
+            }
+
+            // Eliminate the soldier at the current position
+            String killed = soldiers.poll();
+            System.out.println(count + ". " + killed);
+            count++;
+        }
+        long endTime = System.currentTimeMillis();
+        long elapsedTime = endTime - startTime;
+        // Print the survivor
+        String survivor = soldiers.poll();
+        System.out.println("\nThe survivor is " + survivor + ".");
+        System.out.println("Runtime: " + elapsedTime + "ms.");
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
@@ -60,30 +86,5 @@ public class JosephusProblem {
         sc.close();
 
         killSoldiers(circArray, positionVal);
-    }
-
-    public static void killSoldiers(Queue<String> soldiers, int position) {
-        long startTime = System.currentTimeMillis();
-        System.out.println("\nEliminating order:");
-        int count = 1;
-
-        // Eliminate soldiers until only one is left in the queue
-        while (soldiers.size() > 1) {
-            // Iterate through the queue
-            for (int i = 0; i < position - 1; i++) {
-                soldiers.add(soldiers.poll());
-            }
-
-            // Eliminate the soldier at the current position
-            String killed = soldiers.poll();
-            System.out.println(count + ". " + killed);
-            count++;
-        }
-        long endTime = System.currentTimeMillis();
-        long elapsedTime = endTime - startTime;
-        // Print the survivor
-        String survivor = soldiers.poll();
-        System.out.println("\nThe survivor is " + survivor + ".");
-        System.out.println("Runtime: " + elapsedTime + "ms.");
     }
 }
