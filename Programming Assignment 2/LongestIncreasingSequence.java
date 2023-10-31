@@ -20,65 +20,6 @@ import java.util.Scanner;
 
 public class LongestIncreasingSequence {
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int choice = 0;
-        int matrixSize = 0;
-        long startTime;
-
-        while (true) {
-            System.out.print("Please enter (1) for Test File Version or (2) for Random Function Version: ");
-            if (sc.hasNextInt()) {
-                choice = sc.nextInt();
-                if (choice == 1 || choice == 2) {
-                    break;
-                }
-            }
-        }
-
-        if (choice == 1) {
-            System.out.println("***Test File Version***");
-            System.out.print("Please enter the size of the given matrix: ");
-            matrixSize = sc.nextInt();
-            sc.nextLine(); // Consume the newline character
-
-            System.out.print("Enter the file you would like to check: ");
-            String filename = sc.nextLine();
-
-            int[][] matrix = readMatrixFromFile(filename, matrixSize);
-
-            startTime = System.currentTimeMillis();
-
-            List<SequenceData> sequence = findLIS(matrix);
-
-            long endTime = System.currentTimeMillis();
-            long elapsedTime = endTime - startTime;
-
-            // Print the sequence
-            printSequence(sequence);
-            System.out.println("Runtime: " + elapsedTime + " ms.");
-        } else {
-            System.out.println("***Randomly Generated Version***");
-            System.out.print("Please enter the size of the given matrix: ");
-            matrixSize = sc.nextInt();
-            int[][] matrix = generateMatrix(matrixSize);
-
-            startTime = System.currentTimeMillis();
-
-            List<SequenceData> sequence = findLIS(matrix);
-
-            long endTime = System.currentTimeMillis();
-            long elapsedTime = endTime - startTime;
-
-            // Print the sequence
-            printSequence(sequence);
-            System.out.println("Runtime: " + elapsedTime + " ms.");
-        }
-
-        sc.close();
-    }
-
     // Generate a random matrix
     public static int[][] generateMatrix(int size) {
         int[][] matrix = new int[size][size];
@@ -168,7 +109,7 @@ public class LongestIncreasingSequence {
     }
 
 
-    // Check if a SequenceData with a specific value and position is present in the list of pairs
+    // Check if a SequenceData with a specific value and position is present in the list
     public static boolean dataCheck(List<SequenceData> sequence, int value, int x, int y) {
         for (SequenceData SequenceData : sequence) {
             if (SequenceData.getValue() == value && SequenceData.getX() == x && SequenceData.getY() == y) {
@@ -204,6 +145,65 @@ public class LongestIncreasingSequence {
             e.printStackTrace();
         }
         return matrix;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int choice = 0;
+        int matrixSize = 0;
+        long startTime;
+
+        while (true) {
+            System.out.print("Please enter (1) for Test File Version or (2) for Random Function Version: ");
+            if (sc.hasNextInt()) {
+                choice = sc.nextInt();
+                if (choice == 1 || choice == 2) {
+                    break;
+                }
+            }
+        }
+
+        if (choice == 1) {
+            System.out.println("***Test File Version***");
+            System.out.print("Please enter the size of the given matrix: ");
+            matrixSize = sc.nextInt();
+            sc.nextLine();
+
+            System.out.print("Enter the file you would like to check: ");
+            String filename = sc.nextLine();
+
+            int[][] matrix = readMatrixFromFile(filename, matrixSize);
+
+            startTime = System.currentTimeMillis();
+
+            List<SequenceData> sequence = findLIS(matrix);
+
+            long endTime = System.currentTimeMillis();
+            long elapsedTime = endTime - startTime;
+
+            // Print the sequence
+            printSequence(sequence);
+            System.out.println("Runtime: " + elapsedTime + " ms.");
+        } else {
+            System.out.println("***Randomly Generated Version***");
+            System.out.print("Please enter the size of the given matrix: ");
+            matrixSize = sc.nextInt();
+            int[][] matrix = generateMatrix(matrixSize);
+
+            startTime = System.currentTimeMillis();
+
+            List<SequenceData> sequence = findLIS(matrix);
+
+            long endTime = System.currentTimeMillis();
+            long elapsedTime = endTime - startTime;
+
+            // Print the sequence
+            printSequence(sequence);
+            System.out.println("Runtime: " + elapsedTime + " ms.");
+        }
+
+        sc.close();
     }
 }
 
