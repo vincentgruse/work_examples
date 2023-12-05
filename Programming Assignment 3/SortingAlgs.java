@@ -162,8 +162,6 @@ class SortingAlgs {
         double runtime = (endTime - startTime) / 1000000.0;
 
         printArr(arr, runtime);
-
-        System.out.println("\nRuntime: " + runtime + " milliseconds");
     }
 
     // Print the first 100 elements of the array and runtime

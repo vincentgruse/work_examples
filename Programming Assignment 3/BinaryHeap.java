@@ -119,7 +119,7 @@ class BinaryHeap {
         int[] randomNumbers = generateRandomNumbers(5000);
 
         // Program 1: Insert elements one-by-one into a heap and measure runtime
-        System.out.println("*** Program 1 ***");
+        System.out.println("*** Insert One-By-One ***");
         Heap h = new Heap(randomNumbers.length);
         long startTime = System.nanoTime();
 
@@ -135,7 +135,7 @@ class BinaryHeap {
         System.out.println("Runtime: " + runtime + " milliseconds");
 
         // Program 2: Build a heap in linear-time from an array and measure runtime
-        System.out.println("\n*** Program 2 ***");
+        System.out.println("\n*** Linear-Time Algorithm ***");
         Heap hLinear = new Heap(randomNumbers.length);
         hLinear.setHeapArray(randomNumbers);
 
